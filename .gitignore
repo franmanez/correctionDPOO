@@ -1,3 +1,5 @@
+!/2_CORRECTIONS
 /2_CORRECTIONS/*
 # Project exclude paths
 /.gradle/
+/build/
