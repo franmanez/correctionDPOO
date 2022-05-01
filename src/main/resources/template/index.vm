@@ -74,7 +74,7 @@
                         <label for="notePAC" class="col-sm-2 col-form-label text-danger"><b>IMPORTANTE</b></label>
                         <div class="col-sm-10">
                             <small class="form-text text-danger">Esta nota <b>NO es la nota final</b> de la PEC. Es la evaluación correspondiente a la ejecución de los tests:</small>
-                            <small class="form-text text-danger"><li>Puede ser que haya ejercicios que no se puntuan con los test unitarios (de ahí que la nota no sea sobre 10).</li></small>
+                            <!--small class="form-text text-danger"><li>Puede ser que haya ejercicios que no se puntuan con los test unitarios (de ahí que la nota no sea sobre 10).</li></small-->
                             <small class="form-text text-danger"><li>Puedes recibir una penalización de la nota obtenida en función de la calidad del código proporcionado, tal y como se especifica en el enunciado.</li></small>
                             <small class="form-text text-danger">En el Registro de EC del aula, tienes los comentarios y la <b>NOTA DEFINITIVA</b> de la PEC</small>
                         </div>
@@ -92,7 +92,7 @@
                             <div class="p-2">
                                 <p class="h4"><i class="fa fa-file-o mr-2" aria-hidden="true"></i>
                                     $exercise.name
-                                    #if ($configurationExercices.get($exercise.name).scoreByMethods)
+                                    #if ($configurationExercises.get($exercise.name).scoreByMethods)
                                         <span class="text-info h5">(puntuación por métodos)</span>
                                     #end
                                 </p>
@@ -150,12 +150,12 @@
 
 
 
-                                            #if($configurationExercices.get($exercise.name).scoreByMethods)
+                                            #if($configurationExercises.get($exercise.name).scoreByMethods)
                                                 #set( $noteTotalByMethod = 0 )
                                                 #foreach( $testcase in $test.testcase )
                                                     #if (! $testcase.failure)
 
-                                                        #set( $exerciseConfiguration = $configurationExercices.get($exercise.name) )
+                                                        #set( $exerciseConfiguration = $configurationExercises.get($exercise.name) )
                                                         #foreach( $testNote in $exerciseConfiguration.listTestNote )
                                                             #if ($exerciseConfiguration.scoreByMethods)
                                                                 #set($noteTotalByMethod = $noteTotalByMethod + $math.toNumber($testNote.methodsNote.get($testcase.name)))
@@ -178,7 +178,7 @@
                                         </td>
                                         <td>
 
-                                            #if($configurationExercices.get($exercise.name).scoreByMethods)
+                                            #if($configurationExercises.get($exercise.name).scoreByMethods)
                                                 <p class="small mb-1 text-info"> Se indica la puntuación obtenida si se supera el test</p>
                                             #end
 
@@ -186,7 +186,7 @@
 
                                                 <p class="blockquote-footer mb-1">
                                                 $testcase.name
-                                                #set( $exerciseConfiguration = $configurationExercices.get($exercise.name) )
+                                                #set( $exerciseConfiguration = $configurationExercises.get($exercise.name) )
                                                 #foreach( $testNote in $exerciseConfiguration.listTestNote )
                                                     #*if ($testNote.methodsNote != {})*#
                                                     #if ($exerciseConfiguration.scoreByMethods)

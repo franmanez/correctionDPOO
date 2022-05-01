@@ -11,7 +11,6 @@ public class GradleService {
 
     public static String GRADLEW_EXECUTABLE;
     Configuration configuration;
-    private static final String DIRECTORY_TEST_CORRECTIONS = "/1_TESTS/";
 
     public GradleService(Configuration configuration){
         this.configuration = configuration;
@@ -27,7 +26,7 @@ public class GradleService {
 
     private void copyOriginalTests(String exerciseName, String url) throws IOException{
         exerciseName = exerciseName.endsWith("_sol") ? exerciseName.split("_")[0] : exerciseName;
-        File srcDir = new File(System.getProperty("user.dir") + DIRECTORY_TEST_CORRECTIONS + this.configuration.getName() + "/" + exerciseName);
+        File srcDir = new File(configuration.getDirectoryTestsPACs() + "/" + exerciseName);
         File destDir = new File(url);
         FileUtils.copyDirectory(srcDir, destDir);
     }

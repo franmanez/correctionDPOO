@@ -9,6 +9,8 @@ import java.util.TreeMap;
 
 public class Configuration {
     private String directoryStudentsPACs;
+    private String directoryReportsPACs;
+    private String directoryTestsPACs;
     private String name;
     TreeMap<String, ExerciceConfiguration> mapExercisesTests;
     private double scorePAC;
@@ -26,6 +28,8 @@ public class Configuration {
 
         assert sc != null;
         this.setDirectoryStudentsPACs(sc.nextLine().split("=")[1].trim());
+        this.setDirectoryReportsPACs(sc.nextLine().split("=")[1].trim());
+        this.setDirectoryTestsPACs(sc.nextLine().split("=")[1].trim());
         this.setName(sc.nextLine().split("=")[1].trim());
         while(sc.hasNext()) {
 
@@ -72,6 +76,22 @@ public class Configuration {
 
     public void setDirectoryStudentsPACs(String directoryStudentsPACs) {
         this.directoryStudentsPACs = directoryStudentsPACs;
+    }
+
+    public String getDirectoryReportsPACs() {
+        return directoryReportsPACs;
+    }
+
+    public void setDirectoryReportsPACs(String directoryReportsPACs) {
+        this.directoryReportsPACs = directoryReportsPACs;
+    }
+
+    public String getDirectoryTestsPACs() {
+        return directoryTestsPACs;
+    }
+
+    public void setDirectoryTestsPACs(String directoryTestsPACs) {
+        this.directoryTestsPACs = directoryTestsPACs;
     }
 
     public String getName() {

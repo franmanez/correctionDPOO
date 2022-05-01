@@ -22,7 +22,6 @@ import java.util.*;
 public class ResultService {
 
     private static final String DIRECTORY_TEST_RESULTS_XML = "/build/test-results/test/";
-    private static final String DIRECTORY_CORRECTIONS = "/2_CORRECTIONS/";
     Configuration configuration;
 
     public ResultService(Configuration configuration){
@@ -46,7 +45,7 @@ public class ResultService {
             student.setName(studentName);
 
             //create student directory
-            File dirResultStudent = new File(System.getProperty("user.dir") + DIRECTORY_CORRECTIONS + studentName);
+            File dirResultStudent = new File(configuration.getDirectoryReportsPACs() +"/"+ studentName);
             dirResultStudent.mkdir();
 
             //TODO maybe performance problem
@@ -64,13 +63,13 @@ public class ResultService {
                 if(projectDirectory.exists()){
 
                     File srcDir = new File(exerciseCurrent.getAbsolutePath() + "/build/reports/tests/test");
-                    File destDir = new File(System.getProperty("user.dir") + DIRECTORY_CORRECTIONS + studentName +"/"+ exercise.getName());
+                    File destDir = new File(configuration.getDirectoryReportsPACs() +"/"+ studentName +"/"+ exercise.getName());
+
                     exercise.setReportUrl("./" + exercise.getName() + "/index.html");
                     try {
                         FileUtils.copyDirectory(srcDir, destDir);
                     } catch (IOException e) {
-                        //e.printStackTrace();
-                        //exercise.setComment("Ejercicio No compila o No presentado");
+                        //exercise.setComment("Exercise Not compile or NP");
                         listExercises.add(exercise);
                         //break;
 
@@ -94,7 +93,7 @@ public class ResultService {
                     }
                 }else{
                     //Not exist project directory, however, the exercise is not present
-                    student.setComment("Ejercicio NP");
+                    student.setComment("Exercise NP");
                 }
             }
 
@@ -107,7 +106,7 @@ public class ResultService {
         return students;
     }
 
-    private List<Testsuite> parserTestSuite(String exerciceName, List<File> xmlFiles){
+    private List<Testsuite> parserTestSuite(String exerciseName, List<File> xmlFiles){
         JAXBContext jaxbContext;
 
         List<Testsuite> listTestsuite = new ArrayList<>();
@@ -119,8 +118,8 @@ public class ResultService {
                 //System.out.println(testsuite);
 
                 //search exercise name in hashmap, and test name in list (loop)
-                //List<TestNote> listTestNote = configuration.getMapExercisesTests().get(exerciceName);
-                ExerciceConfiguration exerciceConfiguration = configuration.getMapExercisesTests().get(exerciceName);
+                //List<TestNote> listTestNote = configuration.getMapExercisesTests().get(exerciseName);
+                ExerciceConfiguration exerciceConfiguration = configuration.getMapExercisesTests().get(exerciseName);
                 for(TestNote current: exerciceConfiguration.getListTestNote()){
                     if(testsuite.getName().endsWith(current.getTestName())){
                         testsuite.setScore(current.getScore());
@@ -137,7 +136,6 @@ public class ResultService {
     }
 
     public void html(List<Student> students){
-        //Configuration configuration = this.loadConfiguration();
 
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.init();
@@ -195,10 +193,8 @@ public class ResultService {
                         noteTotal = noteTotal + note;
 
                     }
-                    //scorePAC = scorePAC + scoreTotal;
                     notePAC = notePAC + noteTotal;
                     notesExercises.add(noteTotal);
-                    //System.out.println("NOTA Ejercicio: "+noteTotal);
                 }
             }
 
@@ -224,12 +220,12 @@ public class ResultService {
             context.put("noteExercises", notesExercises);
             context.put("notePAC", notePAC);
             context.put("scorePAC", configuration.getScorePAC());
-            context.put("configurationExercices", configuration.getMapExercisesTests());
+            context.put("configurationExercises", configuration.getMapExercisesTests());
 
 
             Writer writer;
             try {
-                writer = new FileWriter(System.getProperty("user.dir") + DIRECTORY_CORRECTIONS +student.getName() + "/index.html");
+                writer = new FileWriter(configuration.getDirectoryReportsPACs() +"/"+ student.getName() + "/index.html");
                 template.merge(context, writer);
                 writer.flush();
                 writer.close();
@@ -241,10 +237,10 @@ public class ResultService {
 
     public void zips(){
         System.out.println(System.lineSeparator() + "############ Generate ZIP files ############");
-        File folder = new File(System.getProperty("user.dir") + DIRECTORY_CORRECTIONS);
+        File folder = new File(configuration.getDirectoryReportsPACs());
         PrintStream fileStream = null;
         try {
-            fileStream = new PrintStream(System.getProperty("user.dir") + DIRECTORY_CORRECTIONS + "PASSWORDS.txt");
+            fileStream = new PrintStream(configuration.getDirectoryReportsPACs() +"/"+ "PASSWORDS.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -264,7 +260,7 @@ public class ResultService {
                 String password = RandomStringUtils.randomAlphanumeric(10);
                 System.out.println(current.getName()+".zip - " + password);
 
-                ZipFile zipFile = new ZipFile(System.getProperty("user.dir") + DIRECTORY_CORRECTIONS + current.getName() + ".zip", password.toCharArray());
+                ZipFile zipFile = new ZipFile(configuration.getDirectoryReportsPACs() + "/" + current.getName() + ".zip", password.toCharArray());
                 try {
                     zipFile.addFolder(current, zipParameters);
                 } catch (ZipException e) {
