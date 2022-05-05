@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 @XmlRootElement(name = "testsuite")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Testsuite implements Serializable {

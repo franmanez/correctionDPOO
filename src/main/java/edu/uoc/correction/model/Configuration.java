@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 public class Configuration {
     private String directoryStudentsPACs;
     private String directoryReportsPACs;

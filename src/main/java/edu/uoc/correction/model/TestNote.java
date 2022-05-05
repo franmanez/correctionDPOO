@@ -2,6 +2,10 @@ package edu.uoc.correction.model;
 
 import java.util.HashMap;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 public class TestNote {
     private String testName;
     private double score;

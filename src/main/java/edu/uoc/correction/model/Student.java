@@ -2,6 +2,10 @@ package edu.uoc.correction.model;
 
 import java.util.List;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 public class Student {
     private String name;
     private String comment;

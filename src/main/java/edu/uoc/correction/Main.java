@@ -8,6 +8,10 @@ import edu.uoc.correction.service.ResultService;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
 

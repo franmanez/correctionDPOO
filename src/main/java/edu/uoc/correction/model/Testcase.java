@@ -3,6 +3,10 @@ package edu.uoc.correction.model;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 @XmlRootElement(name = "testcase")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Testcase implements Serializable {

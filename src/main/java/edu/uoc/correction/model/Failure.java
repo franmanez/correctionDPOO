@@ -6,6 +6,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 @XmlRootElement(name = "failure")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Failure implements Serializable {

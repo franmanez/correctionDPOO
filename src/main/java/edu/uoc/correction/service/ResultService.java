@@ -19,6 +19,10 @@ import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.util.*;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 public class ResultService {
 
     private static final String DIRECTORY_TEST_RESULTS_XML = "/build/test-results/test/";

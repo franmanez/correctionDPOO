@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 public class GradleService {
 
     public static String GRADLEW_EXECUTABLE;

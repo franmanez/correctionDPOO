@@ -2,6 +2,10 @@ package edu.uoc.correction.model;
 
 import java.util.List;
 
+/**
+ * @author Fran Manez
+ * @version 1.0
+ */
 public class Exercise {
     private String name;
     private List<Testsuite> testsuiteList;
