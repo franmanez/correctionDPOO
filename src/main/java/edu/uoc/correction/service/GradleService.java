@@ -85,10 +85,14 @@ public class GradleService {
                         System.out.print("\tExecuting gradle CLEAN: ");
                         myExecRuntime(commandClean);
 
-                        //Gradle test
-                        String commandTest = GRADLEW_EXECUTABLE + " -b " + exercise.getAbsolutePath() + "/build.gradle test";
-                        System.out.print("\tExecuting gradle  TEST: ");
-                        myExecRuntime(commandTest);
+                        //check is package not void (Windows problem)
+                        File dirPackage = new File(exercise.getAbsolutePath()+"/src/main/java/edu/uoc/"+configuration.getName().toLowerCase());
+                        if(dirPackage.listFiles().length > 0){
+                            //Gradle test
+                            String commandTest = GRADLEW_EXECUTABLE + " -b " + exercise.getAbsolutePath() + "/build.gradle test";
+                            System.out.print("\tExecuting gradle  TEST: ");
+                            myExecRuntime(commandTest);
+                        }
                     }
                 }
             }
