@@ -35,40 +35,57 @@ public class Configuration {
         this.setDirectoryReportsPACs(sc.nextLine().split("=")[1].trim());
         this.setDirectoryTestsPACs(sc.nextLine().split("=")[1].trim());
         this.setName(sc.nextLine().split("=")[1].trim());
+
+        String exerciseName = "";
         while(sc.hasNext()) {
 
-            String[] splitMethodsNote = sc.nextLine().split("#");
-            String tests = splitMethodsNote[0];
-            String methods = splitMethodsNote.length == 2 ? splitMethodsNote[1] : null;
+            String[] splitTestClasses = sc.nextLine().split(";");
+            for(String testClass : splitTestClasses){
 
-            String[] split = tests.split("=");
-            String exerciseName = split[0].trim();
-            String[] splitTests = split[1].split(",");
-            ExerciceConfiguration exerciceConfiguration = new ExerciceConfiguration();
-            List<TestNote> listTestNotes = new ArrayList<>();
-            for(String test : splitTests){
+                String[] splitMethodsNote = testClass.split("#");
+                String tests = splitMethodsNote[0];
+                String methods = splitMethodsNote.length == 2 ? splitMethodsNote[1] : null;
 
-                String[] splitTestNote = test.split(":");
-                TestNote testNote = new TestNote();
-                testNote.setTestName(splitTestNote[0].trim());
-                testNote.setScore(Double.parseDouble(splitTestNote[1].trim()));
 
-                if(methods != null){
-                    exerciceConfiguration.setScoreByMethods(true);
-                    String[] splitMethods = methods.split(",");
-                    for(String method : splitMethods){
-                        String methodName = method.split(":")[0].trim();
-                        Double methodScore = Double.parseDouble(method.split(":")[1].trim());
-                        testNote.getMethodsNote().put(methodName, methodScore);
-                    }
+                String[] splitTests;
+                String[] split = tests.split("=");
+                if(tests.contains("=")){
+                    exerciseName = split[0].trim();
+                    splitTests = split[1].split(",");
+                }else{
+                    splitTests = split[0].split(",");
+
                 }
 
-                listTestNotes.add(testNote);
-                notePAC += testNote.getScore();
 
+
+                ExerciceConfiguration exerciceConfiguration = new ExerciceConfiguration();
+                List<TestNote> listTestNotes = new ArrayList<>();
+                for(String test : splitTests){
+
+                    String[] splitTestNote = test.split(":");
+                    TestNote testNote = new TestNote();
+                    testNote.setTestName(splitTestNote[0].trim());
+                    testNote.setScore(Double.parseDouble(splitTestNote[1].trim()));
+
+                    if(methods != null){
+                        exerciceConfiguration.setScoreByMethods(true);
+                        String[] splitMethods = methods.split(",");
+                        for(String method : splitMethods){
+                            String methodName = method.split(":")[0].trim();
+                            Double methodScore = Double.parseDouble(method.split(":")[1].trim());
+                            testNote.getMethodsNote().put(methodName, methodScore);
+                        }
+                    }
+
+                    listTestNotes.add(testNote);
+                    notePAC += testNote.getScore();
+
+                }
+                exerciceConfiguration.setListTestNote(listTestNotes);
+                this.getMapExercisesTests().put(exerciseName, exerciceConfiguration);
             }
-            exerciceConfiguration.setListTestNote(listTestNotes);
-            this.getMapExercisesTests().put(exerciseName, exerciceConfiguration);
+
         }
         this.setScorePAC(notePAC);
 
