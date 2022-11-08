@@ -1,8 +1,0 @@
-//Lifes
-2
-//Size
-3
-EASY
-#-#
-@S-
-X-*

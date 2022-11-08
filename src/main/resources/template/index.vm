@@ -74,9 +74,10 @@
                         <label for="notePAC" class="col-sm-2 col-form-label text-danger"><b>IMPORTANTE</b></label>
                         <div class="col-sm-10">
                             <small class="form-text text-danger">Esta nota <b>NO es la nota final</b> de la PEC. Es la evaluación correspondiente a la ejecución de los tests:</small>
-                            <!--small class="form-text text-danger"><li>Puede ser que haya ejercicios que no se puntuan con los test unitarios (de ahí que la nota no sea sobre 10).</li></small-->
+                            <small class="form-text text-danger"><li>El ejercicio 3 sobre comentarios Javadoc, no se está evaluando con este corrector (de ahí que la nota no sea sobre 10).</li></small>
                             <small class="form-text text-danger"><li>Puedes recibir una penalización de la nota obtenida en función de la calidad del código proporcionado, tal y como se especifica en el enunciado.</li></small>
-                            <small class="form-text text-danger">En el Registro de EC del aula, tienes los comentarios y la <b>NOTA DEFINITIVA</b> de la PEC</small>
+                            <small class="form-text text-danger">En el Registro de EC del aula tienes la <b>NOTA DEFINITIVA</b> de la PEC</small>
+                            <small class="form-text text-danger">Revisa los comentarios en tu código con el plugin Codemment</small>
                         </div>
                     </div>
                 </div>
