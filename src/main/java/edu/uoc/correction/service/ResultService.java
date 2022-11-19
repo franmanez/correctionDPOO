@@ -242,13 +242,13 @@ public class ResultService {
     public void zips(){
         System.out.println(System.lineSeparator() + "############ Generate ZIP files ############");
         File folder = new File(configuration.getDirectoryReportsPACs());
-        PrintStream fileStream = null;
+        /*PrintStream fileStream = null;
         try {
             fileStream = new PrintStream(configuration.getDirectoryReportsPACs() +"/"+ "PASSWORDS.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        System.setOut(fileStream);
+        System.setOut(fileStream);*/
 
         //TODO maybe performance problem
         File[] corrections = folder.listFiles();
@@ -256,15 +256,16 @@ public class ResultService {
         Arrays.sort(corrections, Comparator.comparing(File::getName));
 
         ZipParameters zipParameters = new ZipParameters();
-        zipParameters.setEncryptFiles(true);
+        //zipParameters.setEncryptFiles(true);
         zipParameters.setCompressionLevel(CompressionLevel.NORMAL);
-        zipParameters.setEncryptionMethod(EncryptionMethod.AES);
+        //zipParameters.setEncryptionMethod(EncryptionMethod.AES);
         for (File current : corrections) {
             if(current.isDirectory()){
-                String password = RandomStringUtils.randomAlphanumeric(10);
-                System.out.println(current.getName()+".zip - " + password);
+                //String password = RandomStringUtils.randomAlphanumeric(10);
+                //System.out.println(current.getName()+".zip - " + password);
 
-                ZipFile zipFile = new ZipFile(configuration.getDirectoryReportsPACs() + "/" + current.getName() + ".zip", password.toCharArray());
+                //ZipFile zipFile = new ZipFile(configuration.getDirectoryReportsPACs() + "/" + current.getName() + ".zip", password.toCharArray());
+                ZipFile zipFile = new ZipFile(configuration.getDirectoryReportsPACs() + "/" + current.getName() + ".zip");
                 try {
                     zipFile.addFolder(current, zipParameters);
                 } catch (ZipException e) {
