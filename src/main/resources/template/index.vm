@@ -208,7 +208,13 @@
                                                         <span class="text-danger"> $splitOne[1].replaceAll("<", "&lt;").replaceAll(">", "&gt;") </span>
                                                     #end
                                                     *#
-                                                    <span class="text-danger"> <b>[ERROR]</b> $splitOne[1].replaceAll("<", "&lt;").replaceAll(">", "&gt;") </span>
+
+                                                    #if ($splitOne.size() >= 2)
+                                                        <span class="text-danger"> <b>[ERROR]</b> $splitOne[1].replaceAll("<", "&lt;").replaceAll(">", "&gt;") </span>
+                                                    #else
+                                                        <span class="text-danger"> <b>[ERROR]</b> $splitOne </span>
+                                                    #end
+
 
                                                 #end
 
