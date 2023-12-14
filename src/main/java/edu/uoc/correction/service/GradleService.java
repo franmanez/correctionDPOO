@@ -90,7 +90,7 @@ public class GradleService {
                         if(dirPackage.listFiles().length > 0){
                             //Gradle test
                             String commandTest = GRADLEW_EXECUTABLE + " -b " + exercise.getAbsolutePath() + "/build.gradle test";
-                            System.out.print("\tExecuting gradle  TEST: ");
+                            System.out.print("\tExecuting gradle TEST: ");
                             myExecRuntime(commandTest);
                         }
                     }
